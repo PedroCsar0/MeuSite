@@ -4,7 +4,7 @@
     color: darkblue;
 }
 
-body {
+body{
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(65,122,52,1) 35%, rgba(58,121,40,1) 100%);
 }
@@ -14,4 +14,9 @@ body {
     background-position: center center;
     margin-left: auto;
     margin-right: auto;
+}
+
+.HeaderLogo{
+    margin:0 auto;
+    width: 200px;
 }
