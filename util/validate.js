@@ -21,7 +21,7 @@ form.addEventListener('submit', (e) => {
     if(errors.length > 0){
         //se houver erros no array
         e.preventDefault()
-        mensagem_erro.innerText = errors.join(". ")
+        mensagem_erro.innerHTML = errors.map(error => `<p>${error}</p>`).join('')
     }
     
 })
@@ -29,26 +29,33 @@ form.addEventListener('submit', (e) => {
 function getSignupFormErrors(nome, email, password, confirmar_senha){
     let errors = []
 
+    // Função para adicionar a classe 'incorrect' (exceto no input_confirmarsenha)
+    function markIncorrect(input) {
+        if(input) {
+            input.parentElement.classList.add('incorrect')
+        }
+    }
+
     if(nome === '' || nome == null){
         errors.push('Insira um nome')
-        input_nome.parentElement.classList.add('incorrect')
+        markIncorrect(input_nome)
     } 
     if(email === '' || email == null){
         errors.push('Insira um endereço de email')
-        input_email.parentElement.classList.add('incorrect')
+        markIncorrect(input_email)
     } 
     if(password === '' || password == null){
         errors.push('Insira uma senha')
-        input_senha.parentElement.classList.add('incorrect')
-    }
-    if(password.length < 8){
+        markIncorrect(input_senha)
+    } else if(password.length < 8){
         errors.push('A senha precisa ter pelo menos 8 caracteres')
-        input_confirmarsenha.parentElement.classList.add('incorrect')
+        markIncorrect(input_senha);
+        markIncorrect(input_confirmarsenha, '');
     }
     if(password !== confirmar_senha){
         errors.push('As senhas não correspondem')
-        input_senha.parentElement.classList.add('incorrect')
-        input_confirmarsenha.parentElement.classList.add('incorrect')
+        markIncorrect(input_senha);
+        markIncorrect(input_confirmarsenha);
     }
     
     return errors;

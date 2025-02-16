@@ -154,4 +154,8 @@ form div.incorrect input{
 
 #mensagem_erro{
     color: #f06272;
+    text-align: left;
+    margin-top: 5px;
+    font-size: 14px;
+    margin-right: 70px;
 }
