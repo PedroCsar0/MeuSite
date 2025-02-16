@@ -16,28 +16,51 @@ form.addEventListener('submit', (e) => {
     }
     else{
         //se não existir input "nome", na página "login"
-        errors = getLoginFormErrors(input_nome.value, input_senha.value)
+        errors = getLoginFormErrors(input_email.value, input_senha.value)
     }
     if(errors.length > 0){
-        //se houver erros detectados no array
+        //se houver erros no array
         e.preventDefault()
+        mensagem_erro.innerText = errors.join(". ")
     }
     
 })
 
-function getSignupFormErrors(nome, email, senha, confirmar_senha){
+function getSignupFormErrors(nome, email, password, confirmar_senha){
     let errors = []
 
-    if(nome === '' || input_nome == null){
-        errors.push('Insira um nome, por favor!')
+    if(nome === '' || nome == null){
+        errors.push('Insira um nome')
         input_nome.parentElement.classList.add('incorrect')
     } 
-    if(email === '' || input_email == null){
-        errors.push('Insira um endereço de email, por favor!')
+    if(email === '' || email == null){
+        errors.push('Insira um endereço de email')
         input_email.parentElement.classList.add('incorrect')
     } 
-    if(password === '' || input_senha == null){
-        errors.push('Insira uma senha, por favor!')
+    if(password === '' || password == null){
+        errors.push('Insira uma senha')
         input_senha.parentElement.classList.add('incorrect')
-    } 
+    }
+    if(password.length < 8){
+        errors.push('A senha precisa ter pelo menos 8 caracteres')
+        input_confirmarsenha.parentElement.classList.add('incorrect')
+    }
+    if(password !== confirmar_senha){
+        errors.push('As senhas não correspondem')
+        input_senha.parentElement.classList.add('incorrect')
+        input_confirmarsenha.parentElement.classList.add('incorrect')
+    }
+    
+    return errors;
 }
+
+const allInputs = [input_nome, input_email, input_senha, input_confirmarsenha]
+
+allInputs.forEach(input => {
+    input.addEventListener('input', () => {
+        if(input.parentElement.classList.contains('incorrect')){
+            input.parentElement.classList.remove('incorrect')
+            mensagem_erro.innerText = ''
+        }
+    })
+})

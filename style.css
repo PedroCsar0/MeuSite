@@ -151,3 +151,7 @@ form div.incorrect label{
 form div.incorrect input{
     border-color: #f06272;
 }
+
+#mensagem_erro{
+    color: #f06272;
+}
