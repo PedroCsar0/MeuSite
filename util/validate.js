@@ -54,7 +54,23 @@ function getSignupFormErrors(nome, email, password, confirmar_senha){
     return errors;
 }
 
-const allInputs = [input_nome, input_email, input_senha, input_confirmarsenha]
+function getLoginFormErrors(email, password){
+    let errors = []
+
+    if(email === '' || email == null){
+        errors.push('Insira um endereço de email')
+        input_email.parentElement.classList.add('incorrect')
+    } 
+    if(password === '' || password == null){
+        errors.push('Insira uma senha')
+        input_senha.parentElement.classList.add('incorrect')
+    }
+
+    return errors;
+}
+
+const allInputs = [input_nome, input_email, input_senha, input_confirmarsenha]. filter(input => input != null)
+
 
 allInputs.forEach(input => {
     input.addEventListener('input', () => {
